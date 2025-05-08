@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - TeamMV10</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .hamburger {
+      font-size: 24px;
+      padding: 15px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .menu-bar {
+      display: none;
+      flex-direction: column;
+      background: rgba(0,0,0,0.7);
+      padding: 10px;
+    }
+
+    .menu-bar.open {
+      display: flex;
+    }
+
+    .menu-bar a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 0;
+    }
+
+    .main-content {
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    table {
+      width: 90%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #fff;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .eye-img {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 100px;
+      display: none;
+      z-index: 1000;
+      animation: eyeAnimation 2s infinite ease-in-out;
+    }
+
+    @keyframes eyeAnimation {
+      0% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hamburger" onclick="toggleMenu()">&#9776; Menu</div>
+  <div id="menu" class="menu-bar">
+    <a href="index.html">Home</a>
+    <a href="class-updates.html">Class Updates</a>
+    <a href="message-wall.html">Message Wall</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <div class="main-content">
+    <h1>Contact Details</h1>
+    <p>Here, you can find the contact numbers of all our classmates:</p>
+    <table>
+      <tr><th>Name</th><th>Contact Number</th></tr>
+      <tr><td>Abel Maxon</td><td>+91 94880 82895</td></tr>
+      <tr><td>Amizhdhan</td><td>+91 99445 61567</td></tr>
+      <tr><td>Dejeshwar</td><td>+91 75984 83628</td></tr>
+      <tr><td>Jashni</td><td>+91 99769 70746</td></tr>
+      <tr><td>Karthikeyan</td><td>+91 97868 11409</td></tr>
+      <tr><td>Krishna Patri</td><td>+91 97891 86356</td></tr>
+      <tr><td>Logapriyan</td><td>+91 73736 97476</td></tr>
+      <tr><td>Mahadev</td><td>+91 93856 54837</td></tr>
+      <tr><td>Mohiith</td><td>+91 78714 47272</td></tr>
+      <tr><td>Nagulesh</td><td>+91 75503 35959</td></tr>
+      <tr><td>Nithin Krishna</td><td>+91 89251 15236</td></tr>
+      <tr><td>Ponsasi Dharun</td><td>+91 96599 52447</td></tr>
+      <tr><td>Puviyarasu</td><td>+91 97902 17603</td></tr>
+      <tr><td>Rajith</td><td>+91 91504 86799</td></tr>
+      <tr><td>Ramya</td><td>+91 83443 60414</td></tr>
+      <tr><td>Rishi</td><td>+91 94422 00498</td></tr>
+      <tr><td>Sivasankar</td><td>+91 84895 07668</td></tr>
+      <tr><td>Srushti</td><td>+91 95855 50838</td></tr>
+      <tr><td>Umaprasad</td><td>+91 93447 97266</td></tr>
+      <tr><td>Vishwa</td><td>+91 96775 55544</td></tr>
+    </table>
+    <p>We’d love to hear from you! Kindly refrain from spam or unsolicited messages.</p>
+  </div>
+
+  <img src="eye.png" alt="Eye" class="eye-img" id="eye"/>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("open");
+    }
+
+    window.addEventListener("scroll", function () {
+      const eye = document.getElementById("eye");
+      eye.style.display = window.scrollY > 100 ? "block" : "none";
+    });
+  </script>
+
+</body>
+</html>
