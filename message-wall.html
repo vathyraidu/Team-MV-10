@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Message Wall - TeamMV10</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .hamburger {
+      font-size: 24px;
+      padding: 15px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .menu-bar {
+      display: none;
+      flex-direction: column;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      text-align: left;
+    }
+
+    .menu-bar.open {
+      display: flex;
+    }
+
+    .menu-bar a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 0;
+      font-weight: bold;
+    }
+
+    .container {
+      padding: 20px;
+      padding-bottom: 150px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .messages {
+      max-width: 600px;
+      margin: 10px auto;
+    }
+
+    .message {
+      background: rgba(0,0,0,0.3);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+    }
+
+    .username {
+      font-weight: bold;
+      color: #ffdd57;
+    }
+
+    .timestamp {
+      font-size: 12px;
+      color: #ccc;
+      margin-top: 5px;
+    }
+
+    .input-area {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    textarea, input[type="file"], button {
+      width: 90%;
+      margin: 5px auto;
+      display: block;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    button {
+      background: #fff;
+      color: #2575fc;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 10px white;
+    }
+
+    button:hover {
+      background: #2575fc;
+      color: white;
+      box-shadow: 0 0 20px white;
+    }
+
+    #signup {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 90%;
+      max-width: 400px;
+      margin: 10px auto;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #messageWall {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hamburger Menu -->
+  <div class="hamburger" onclick="toggleMenu()">&#9776; Menu</div>
+  <div id="menu" class="menu-bar">
+    <a href="index.html">Home</a>
+    <a href="class-updates.html">Class Updates</a>
+    <a href="message-wall.html">Message Wall</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- Signup -->
+  <div id="signup">
+    <h1>Sign Up</h1>
+    <input type="text" id="signupUsername" placeholder="Username" />
+    <input type="email" id="signupEmail" placeholder="Email Address" />
+    <input type="password" id="signupPassword" placeholder="Password" />
+    <button onclick="completeSignup()">Sign Up</button>
+  </div>
+
+  <!-- Message Wall -->
+  <div id="messageWall">
+    <div class="container">
+      <h1>Message Wall</h1>
+      <div class="messages" id="messages"></div>
+    </div>
+
+    <div class="input-area">
+      <textarea id="textMsg" rows="2" placeholder="Type your message..."></textarea>
+      <input type="file" id="media" accept="image/*,audio/*" />
+      <button onclick="postMessage()">Post</button>
+    </div>
+  </div>
+
+  <script>
+    let currentUser = "";
+
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("open");
+    }
+
+    function completeSignup() {
+      const username = document.getElementById('signupUsername').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+
+      if (!username || !email || !password) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      currentUser = username;
+      document.getElementById("signup").style.display = "none";
+      document.getElementById("messageWall").style.display = "block";
+    }
+
+    function postMessage() {
+      const text = document.getElementById('textMsg').value;
+      const file = document.getElementById('media').files[0];
+      const container = document.getElementById('messages');
+
+      let div = document.createElement('div');
+      div.className = 'message';
+
+      const timestamp = new Date().toLocaleString();
+
+      div.innerHTML += `<p class="username">${currentUser}:</p>`;
+      if (text) div.innerHTML += `<p>${text}</p>`;
+      if (file) {
+        const url = URL.createObjectURL(file);
+        if (file.type.startsWith('image')) {
+          div.innerHTML += `<img src="${url}" style="max-width:100%; border-radius:10px;" />`;
+        } else if (file.type.startsWith('audio')) {
+          div.innerHTML += `<audio controls src="${url}"></audio>`;
+        }
+      }
+      div.innerHTML += `<div class="timestamp">${timestamp}</div>`;
+
+      container.prepend(div);
+      document.getElementById('textMsg').value = '';
+      document.getElementById('media').value = '';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Class Updates - TeamMV10</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      color: white;
+    }
+
+    .hamburger {
+      font-size: 24px;
+      padding: 15px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .menu-bar {
+      display: none;
+      flex-direction: column;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      text-align: left;
+    }
+
+    .menu-bar.open {
+      display: flex;
+    }
+
+    .menu-bar a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 0;
+      font-weight: bold;
+    }
+
+    .main-content {
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 2s forwards; /* Add fade-in animation */
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .update-box {
+      margin: 20px auto;
+      padding: 15px;
+      width: 80%;
+      max-width: 600px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+    }
+
+    .update-btn {
+      background-color: #2575fc;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .update-btn:hover {
+      background-color: #6a11cb;
+      transform: scale(1.05);
+    }
+
+    .update-message {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      border-radius: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+      animation: glowEffect 1.5s infinite alternate;
+    }
+
+    @keyframes glowEffect {
+      0% {
+        text-shadow: 0 0 10px #ff4081;
+      }
+      100% {
+        text-shadow: 0 0 20px #ff4081;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hamburger Menu -->
+  <div class="hamburger" onclick="toggleMenu()">&#9776; Menu</div>
+  <div id="menu" class="menu-bar">
+    <a href="index.html">Home</a>
+    <a href="class-updates.html">Class Updates</a>
+    <a href="message-wall.html">Message Wall</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1>Class Updates</h1>
+    <p>Only Mohiith can send updates. Users can only view the messages below.</p>
+
+    <textarea id="updateMessage" class="update-box" placeholder="Type an update..."></textarea>
+    <br>
+    <button class="update-btn" onclick="postUpdate()">Post Update</button>
+
+    <div class="update-message" id="messageContainer" style="display: none;">
+      <p id="messageText"></p>
+      <p style="font-size:14px; margin-top:10px;">- Posted by Mohiith</p>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("open");
+    }
+
+    function postUpdate() {
+      const text = document.getElementById("updateMessage").value.trim();
+      if (text === "") {
+        alert("Please enter a message.");
+        return;
+      }
+
+      document.getElementById("messageText").innerText = text;
+      document.getElementById("messageContainer").style.display = "block";
+      document.getElementById("updateMessage").value = "";
+    }
+  </script>
+
+</body>
+</html>
